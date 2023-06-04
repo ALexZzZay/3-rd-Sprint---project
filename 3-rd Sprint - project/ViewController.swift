@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var labelCount: UILabel!
     @IBOutlet weak var resetButton: UIButton!
     @IBOutlet weak var historyView: UITextView!
+    @IBOutlet weak var clearTextFieldButton: UIButton!
     
     var count: Int = 0
     var date: Date = Date()
@@ -22,11 +23,8 @@ class ViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        labelCount.text = "Значение счетчика: \n\(count)"
-        labelCount.numberOfLines = 4
-        labelCount.textAlignment = .center
-        
-        historyView.textColor = .black
+        labelCount.text = "\(count)"
+
     }
     
     @IBAction func incrementNumber(_ sender: Any) {
@@ -35,7 +33,7 @@ class ViewController: UIViewController, UITextViewDelegate {
     labelCount.text = "Значение счетчика: \n\(count)"
     
     dateFormatter.dateFormat = "dd.MM.yy - HH:mm"
-    var dateString = dateFormatter.string(from: date)
+        let dateString = dateFormatter.string(from: date)
     
     historyView.text += "\n[\(dateString)]: Значение изменено на +1"
     let range = NSMakeRange(historyView.text.count - 1, 0)
@@ -49,7 +47,7 @@ class ViewController: UIViewController, UITextViewDelegate {
         count += 0
             
         dateFormatter.dateFormat = "dd.MM.yy - HH:mm"
-        var dateString = dateFormatter.string(from: date)
+            let dateString = dateFormatter.string(from: date)
         
         historyView.text += "\n[\(dateString)]: Попытка уменьшить значение счётчика ниже 0"
         let range = NSMakeRange(historyView.text.count - 1, 0)
@@ -60,28 +58,37 @@ class ViewController: UIViewController, UITextViewDelegate {
             count -= 1
         
         dateFormatter.dateFormat = "dd.MM.yy - HH:mm"
-        var dateString = dateFormatter.string(from: date)
+        let dateString = dateFormatter.string(from: date)
         
         historyView.text += "\n[\(dateString)]: Значение увеличилось на -1"
         let range = NSMakeRange(historyView.text.count - 1, 0)
         historyView.scrollRangeToVisible(range)
         
+        labelCount.text = "Значение счетчика: \n\(count)"
+        
         }
         
-        labelCount.text = "Значение счетчика: \n\(count)"
+        labelCount.text = "\(count)"
+        
     }
     
     @IBAction func resetCount(_ sender: Any) {
         count = 0
-        labelCount.text = "Значение счетчика: \n\(count)"
+        labelCount.text = "\(count)"
         
         dateFormatter.dateFormat = "dd.MM.yy - HH:mm"
-        var dateString = dateFormatter.string(from: date)
+        let dateString = dateFormatter.string(from: date)
         
         historyView.text += "\n[\(dateString)]: Значение сброшено"
         let range = NSMakeRange(historyView.text.count - 1, 0)
         historyView.scrollRangeToVisible(range)
         
     }
+    
+    
+    @IBAction func clearAllTextFromField(_ sender: Any) {
+        historyView.text = "История изменений:"
+    }
+    
 }
 
