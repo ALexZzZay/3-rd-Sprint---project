@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var historyView: UITextView!
     @IBOutlet weak var clearTextFieldButton: UIButton!
     
+    
     var count: Int = 0
     var date: Date = Date()
     let dateFormatter = DateFormatter()
